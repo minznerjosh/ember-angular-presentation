@@ -17,6 +17,8 @@
         <link rel="stylesheet" href="css/reveal.min.css">
         <link rel="stylesheet" href="css/theme/default.css" id="theme">
 
+        <link rel="stylesheet" href="./css/presentation.css">
+
         <!-- For syntax highlighting -->
         <link rel="stylesheet" href="lib/css/zenburn.css">
 
@@ -44,12 +46,14 @@
                 <section>
                     <h1>Ember vs. Angular</h1>
                     <h3>Javascript.io; March 6, 2014</h3>
+                    <img alt="ember" style="width: 20rem; vertical-align: middle;" src="http://todaymade.com/blog/wp-content/uploads/2013/03/emberjs-logo.png">
+                    <img alt="angular" style="width: 20rem; vertical-align: middle;" src="http://3.bp.blogspot.com/-eKJAj8KNic0/UpjT9sL_TGI/AAAAAAAAAgg/B8lRtvyJhSw/s1600/angularjs.jpeg.png">
                 </section>
 
                 <section>
                     <h2>Who Is This?</h2>
                     <ul>
-                        <li class="fragment" data-fragment-index="0">Wrote Javascript in 6th Grade</li>
+                        <li class="fragment" data-fragment-index="0">First JS Exposure in Middle School</li>
                         <li class="fragment" data-fragment-index="1">Messed with PHP, JQuery, Objective-C</li>
                         <li class="fragment" data-fragment-index="2">Cappuccino, SproutCore, Ember.js</li>
                     </ul>
@@ -72,13 +76,552 @@
                 </section>
 
                 <section>
-                    <p>Both Ember and Angular embrace the idea that the browser is no longer a lowly document viewer, but a full-fledged application runtime environment.</p>
-                    <p class="fragment">Ember and Angular are tools to help you create single-page web apps (or browser apps.)</p>
+                    <ul>
+                        <li>Browser is more than a document viewer</li>
+                        <li class="fragment">Browser is an application runtime environment</li>
+                        <li class="fragment">Ember and Angular help you create browser apps</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Who's using this stuff?</h2>
+                    </section>
+                    <section data-background="#A6120D">
+                        <h3>AngularJS</h3>
+                        <img alt="google" src="http://www.seomofo.com/downloads/new-google-logo-knockoff.png" style="width: 20rem; vertical-align: middle;">
+                        <img alt="youtube" src="https://utsa.edu/trcss/soar/logos/youtube.png" style="width: 20rem; vertical-align: middle;">
+                    </section>
+                    <section data-background="#e1563f">
+                        <h3>Ember.js</h3>
+                        <img alt="groupon" src="http://emberjs.com/images/about/groupon.png" style="width: 20rem; vertical-align: middle;">
+                        <img alt="discourse" src="http://emberjs.com/images/about/discourse.png" style="width: 20rem; vertical-align: middle;">
+                        <img alt="yahoo" src="http://emberjs.com/images/about/yahoo.png" style="width: 20rem; vertical-align: middle;">
+                        <img alt="zendesk" src="http://emberjs.com/images/about/zendesk.png" style="width: 20rem; vertical-align: middle;">
+                        <img alt="square" src="http://emberjs.com/images/about/square.png" style="width: 20rem; vertical-align: middle;">
+                        <img alt="livingsocial" src="http://emberjs.com/images/about/livingsocial.png" style="width: 20rem; vertical-align: middle;">
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Similarities</h2>
+                        <h3>Two-Way Data Binding</h3>
+                    </section>
+                    <section data-background="#A6120D">
+                        <h3>AngularJS</h3>
+                        <iframe src="./demos/databinding/angular.html"></iframe>
+                        <h6>index.html</h6>
+                        <pre>
+                            <code class="html">
+&lt;body&nbsp;ng-app&gt;
+    &lt;h4&gt;My&nbsp;title:&nbsp;{{title}}&lt;/h4&gt;
+    &lt;form&nbsp;action=&quot;&quot;&gt;
+        &lt;input&nbsp;type=&quot;text&quot;&nbsp;ng-model=&quot;title&quot;&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+                            </code>
+                        </pre>
+                    </section>
+                    <section data-background="#e1563f">
+                        <h3>Ember.js</h3>
+                        <iframe src="./demos/databinding/ember.html"></iframe>
+                        <h6>app.js</h6>
+                        <pre>
+                            <code class="javascript">
+var App = Ember.Application.create();
+                            </code>
+                        </pre>
+                        <h6>application.hbs</h6>
+                        <pre>
+                            <code class="html">
+&lt;h4&gt;My&nbsp;Title:&nbsp;{{title}}&lt;/h4&gt;
+&lt;form&nbsp;action=&quot;&quot;&gt;
+    {{input&nbsp;value=title}}
+&lt;/form&gt;
+                            </code>
+                        </pre>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Differences</h2>
+                        <h3>Binding Implementation</h3>
+                    </section>
+                    <section data-background="#A6120D">
+                        <h3>AngularJS</h3>
+                        <ul>
+                            <li class="fragment">$scope (the magic)</li>
+                            <li class="fragment">native javascript setters ($scope.model.name = 'Josh';)</li>
+                            <li class="fragment">$scope.digest() (the magic behind the magic)</li>
+                            <li class="fragment">Dirty checking!</li>
+                        </ul>
+                    </section>
+                    <section data-background="#A6120D">
+                        <iframe src="./demos/setting/angular.html"></iframe>
+                        <h6>index.html</h6>
+                        <pre>
+                            <code class="html">
+&lt;body ng-app ng-controller=&quot;AppController as AppCtrl&quot;&gt;
+    &lt;h4&gt;What's up, {{name}}?&lt;/h4&gt;
+    &lt;button ng-click=&quot;AppCtrl.sayName('Josh')&quot;&gt;Say My Name&lt;/button&gt;
+&lt;/body&gt;
+                            </code>
+                        </pre>
+                        <h6>app.js</h6>
+                        <pre>
+                            <code class="javascript">
+function AppController($scope) {
+    $scope.name = 'Nobody';
+
+    this.sayName = function(name) {
+        $scope.name = name;
+    }
+}
+                            </code>
+                        </pre>
+                    </section>
+                    <section data-background="#e1563f">
+                        <h3>Ember.js</h3>
+                        <ul>
+                            <li class="fragment">Controllers!</li>
+                            <li class="fragment">Setter/Getter Functions (this.set('name', 'Josh');)</li>
+                            <li class="fragment">The run loop.</li>
+                        </ul>
+                    </section>
+                    <section data-background="#e1563f">
+                        <iframe src="./demos/setting/ember.html"></iframe>
+                        <h6>application.hbs</h6>
+                        <pre>
+                            <code class="html">
+&lt;h4&gt;What's up, {{name}}?&lt;/h4&gt;
+&lt;button {{action &quot;sayName&quot; &quot;Josh&quot;}}&gt;Say My Name&lt;/button&gt;
+                            </code>
+                        </pre>
+                        <h6>app.js</h6>
+                        <pre>
+                            <code class="javascript">
+var App = Ember.Application.create();
+App.ApplicationController = Ember.Controller.extend({
+    name: 'Nobody',
+    actions: {
+        sayName: function(name) {
+            this.set('name', name);
+        }
+    }
+});
+                            </code>
+                        </pre>
+                    </section>
+                    <section>
+                        <h2>What Does This Mean for You?</h2>
+                        <h3 class="fragment">Performance!</h3>
+                    </section>
+                    <section data-background="#A6120D" style="font-size: 75%;">
+                        <h3>AngularJS</h3>
+                        <iframe src="./demos/performance/angular.html"></iframe>
+                        <h6>index.html</h6>
+                        <pre>
+                            <code class="html">
+&lt;body ng-app ng-controller=&quot;AppController as AppCtrl&quot;&gt;
+    &lt;h4&gt;My Title: {{title}}&lt;/h4&gt;
+    &lt;form action=&quot;&quot;&gt;
+        &lt;input type=&quot;text&quot; ng-model=&quot;title&quot;&gt;
+    &lt;/form&gt;
+    &lt;ul class=&quot;list-of-bs&quot;&gt;
+        &lt;li ng-repeat=&quot;model in list&quot;&gt;{{model.value}}&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;button ng-click=&quot;AppCtrl.upset()&quot;&gt;GO NUTS!&lt;/button&gt;
+    &lt;button ng-click=&quot;list.length = 0&quot;&gt;Clean Up&lt;/button&gt;
+&lt;/body&gt;
+                            </code>
+                        </pre>
+                        <h6>app.js</h6>
+                        <pre>
+                            <code class="javascript">
+function AppController($scope) {
+    $scope.list = [];
+
+    this.upset = function() {
+        for (var index = 0; index < 20000; index++) {
+            $scope.list.push({
+                value: index
+            });
+        }
+    };
+}
+                            </code>
+                        </pre>
+                    </section>
+                    <section data-background="#e1563f" style="font-size: 60%;">
+                        <h3>Ember.js</h3>
+                        <iframe src="./demos/performance/ember.html"></iframe>
+                        <h6>application.hbs</h6>
+                        <pre>
+                            <code class="html">
+&lt;h4&gt;My Title: {{title}}&lt;/h4&gt;
+&lt;form action=&quot;&quot;&gt;
+    {{input value=title}}
+&lt;/form&gt;
+&lt;ul class=&quot;list-of-bs&quot;&gt;
+    {{#each list}}
+        &lt;li&gt;{{this.value}}&lt;/li&gt;
+    {{/each}}
+&lt;/ul&gt;
+&lt;button {{action &quot;upset&quot;}}&gt;GO NUTS!&lt;/button&gt;
+&lt;button {{action &quot;cleanUp&quot;}}&gt;Clean Up&lt;/button&gt;
+                            </code>
+                        </pre>
+                        <h6>app.js</h6>
+                        <pre>
+                            <code class="javascript">
+var App = Ember.Application.create();
+App.ApplicationController = Ember.Controller.extend({
+    list: [],
+    actions: {
+        upset: function() {
+            for (var index = 0; index < 20000; index++) {
+                this.list.pushObject({
+                    value: index
+                });
+            }
+        },
+        cleanUp: function() {
+            this.list.clear();
+        }
+    }
+});
+                            </code>
+                        </pre>
+                    </section>
                 </section>
 
                 <section>
                     <h2>Similarities</h2>
-                    <h3>Two-Way Data Binding</h3>
+                    <h3>Philosophy</h3>
+                    <ul>
+                        <li class="fragment">Two-way databinding is great!</li>
+                        <li class="fragment">HTML &amp; CSS belong in Browser App Development</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Differences</h2>
+                        <h3>Philosophy</h3>
+                    </section>
+                    <section data-background="#A6120D">
+                        <h3>AngularJS</h3>
+                        <blockquote cite="http://angularjs.org/">AngularJS is a toolset for building the framework most suited to your application development.</blockquote>
+                    </section>
+                    <section data-background="#e1563f">
+                        <h3>Ember.js</h3>
+                        <blockquote cite="http://emberjs.com/">A framework for building <strong>ambitious</strong> web applications</blockquote>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Differences</h2>
+                        <h3>Focus</h3>
+                    </section>
+                    <section data-background="#A6120D">
+                        <h3>AngularJS</h3>
+                        <ul>
+                            <li class="fragment">Dependency Injection</li>
+                            <li class="fragment">Testing</li>
+                            <li class="fragment">Composable Views</li>
+                            <li class="fragment">POJO Model</li>
+                        </ul>
+                    </section>
+                    <section data-background="#e1563f">
+                        <h3>Ember.js</h3>
+                        <ul>
+                            <li class="fragment">URL Routing</li>
+                            <li class="fragment">MVC+R</li>
+                            <li class="fragment">Elimination of Boilerplate (Object Generation)</li>
+                            <li class="fragment">Custom Object Model (Classical Inheritance)</li>
+                        </ul>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Dependency Injection</h2>
+                    </section>
+                    <section data-background="#A6120D">
+                        <h3>AngularJS</h3>
+                        <pre>
+                            <code class="javascript">
+angular.module('app', [])
+    .service('Useless', function($timeout) {
+        this.dumb = function() {
+            $timeout(function() {
+                alert('TROLL');
+            }, 1000);
+        }
+    })
+    .controller('AppController', function(Useless) {
+        this.doSomethingDumb = function() {
+            Useless.dumb();
+        };
+    });
+                            </code>
+                        </pre>
+                    </section>
+                    <section data-background="#e1563f">
+                        <h3>Ember.js</h3>
+                        <pre>
+                            <code class="javascript">
+var Useless = Ember.Object.extend({
+    dumb: function() {
+        Ember.run.later(null, function() {
+            alert('TROLL');
+        }, 1000);
+    }
+});
+Ember.Application.initializer({
+    name: 'registerDep',
+    initialize: function(container, application) {
+        application.register('service:dumb', Useless);
+    }
+});
+Ember.Application.initializer({
+    name: 'injectDep',
+    after: 'registerDep',
+    initialize: function(container, application) {
+        application.inject('controller:application', 'useless', 'service:dumb');
+    }
+});
+var ApplicationController = Ember.Controller.extend({
+    doSomethingDumb: function() {
+        this.useless.dumb();
+    }
+});
+                            </code>
+                        </pre>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Testing</h2>
+                    </section>
+                    <section data-background="#A6120D">
+                        <h3>AngularJS</h3>
+                        <pre>
+                            <code class="javascript">
+describe('AppController', function() {
+    var $rootScope,
+        $scope,
+        $controller,
+        AppCtrl;
+
+    var Useless;
+
+    beforeEach(function() {
+        module('app', function($provide) {
+            $provide.value('Useless', {
+                dumb: jasmine.createSpy()
+            });
+        });
+
+        inject(function($injector) {
+            $rootScope = $injector.get('$rootScope');
+            $controller = $injector.get('$controller');
+
+            Useless = $injector.get('Useless');
+
+            $scope = $rootScope.$new();
+            AppCtrl = $controller('AppController', { $scope: $scope });
+        });
+    });
+
+    it('should call dumb() on Useless when its doSomethingDumb() method is called', function() {
+        AppCtrl.doSomethingDumb();
+        expect(Useless.dumb).toHaveBeenCalled();
+    });
+});
+                            </code>
+                        </pre>
+                    </section>
+                    <section data-background="#e1563f">
+                        <h3>Ember.js</h3>
+                        <pre>
+                            <code class="javascript">
+describe('AppController', function() {
+    var appCtrl;
+
+    var useless;
+
+    beforeEach(function() {
+        useless = {
+            dumb: jasmine.createSpy()
+        };
+
+        appCtrl = App.ApplicationController.create({
+            useless: useless
+        });
+    });
+
+    it('should call dumb() on Useless when its doSomethingDumb() method is called', function() {
+        appCtrl.doSomethingDumb();
+        expect(useless.dumb).toHaveBeenCalled();
+    });
+});
+                            </code>
+                        </pre>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Composable Views</h2>
+                    </section>
+                    <section data-background="#A6120D">
+                        <h3>AngularJS</h3>
+                        <iframe src="./demos/blink/angular.html"></iframe>
+                        <pre>
+                            <code class="html">
+&lt;body ng-app=&quot;app&quot;&gt;
+    &lt;h3&gt;{{title}}&lt;/h3&gt;
+    &lt;blink ng-click=&quot;title = 'foo'&quot;&gt;Hello!&lt;/blink&gt;
+&lt;/body&gt;
+                            </code>
+                        </pre>
+                        <pre>
+                            <code class="javascript">
+angular.module('app', [])
+    .directive('blink', function($timeout) {
+        return {
+            restrict: 'E',
+            scope: {},
+            link: function(scope, element) {
+                function show() {
+                    element.css('display', '');
+                    $timeout(hide, 1000);
+                }
+
+                function hide() {
+                    element.css('display', 'none');
+                    $timeout(show, 1000);
+                }
+
+                show();
+            }
+        };
+    });
+                            </code>
+                        </pre>
+                    </section>
+                    <section data-background="#e1563f">
+                        <h3>Ember.js</h3>
+                        <iframe src="./demos/blink/ember.html"></iframe>
+                        <pre>
+                            <code class="html">
+&lt;!-- application.hbs --&gt;
+{{#io-blink}}Hello!{{/io-blink}}
+
+&lt;!-- components/io-blink.hbs --&gt;
+{{yield}}
+                            </code>
+                        </pre>
+                        <pre>
+                            <code class="javascript">
+var App = Ember.Application.create();
+App.IoBlinkComponent = Ember.Component.extend({
+    show: function() {
+        this.$().show();
+        Ember.run.later(this, this.hide, 1000);
+    }.on('didInsertElement'),
+    hide: function() {
+        this.$().hide();
+        Ember.run.later(this, this.show, 1000);
+    }
+});
+                            </code>
+                        </pre>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>URL Routing</h2>
+                    </section>
+                    <section data-background="#A6120D">
+                        <h3>AngularJS</h3>
+                        <pre>
+                            <code class="javascript">
+angular.module('app', ['ngRoute'])
+    .config(function($routeProvider) {
+        $routeProvider
+            .when('/', {
+                controller: 'IndexController',
+                controllerAs: 'IndexCtrl',
+                templateUrl: 'views/index.html'
+            })
+            .when('/posts', {
+                controller: 'PostsController',
+                controllerAs: 'PostsCtrl',
+                templateUrl: 'views/posts.html'
+            });
+    });
+                            </code>
+                        </pre>
+                        <pre>
+                            <code class="html">
+&lt;h1&gt;My App&lt;/h1&gt;
+&lt;ng-view&gt;&lt;/ng-view&gt;
+                            </code>
+                        </pre>
+                    </section>
+                    <section data-background="#e1563f">
+                        <h3>Ember.js</h3>
+                        <pre>
+                            <code class="javascript">
+var App = Ember.Application.create();
+App.Router.map(function() {
+    // /posts
+    this.resource('posts', function() {
+        // /posts/new
+        this.route('new');
+    });
+});
+                            </code>
+                        </pre>
+                        <pre>
+                            <code class="html">
+&lt;!-- application.hbs --&gt;
+&lt;h1&gt;My App&lt;/h1&gt;
+{{outlet}}
+
+&lt;!-- posts.hbs --&gt;
+&lt;h1&gt;My Posts&lt;/h1&gt;
+{{outlet}}
+
+&lt;!-- posts/new.hbs --&gt;
+&lt;h1&gt;New Post&lt;/h1&gt;
+                            </code>
+                        </pre>
+                    </section>
+                </section>
+
+                <section>
+                    <h1>So... <span class="fragment">Angular or Ember?</span></h1>
+                </section>
+
+                <section>
+                    <h1>That's up to you!</h1>
+                    <p class="fragment">Do you want to spend your time building the framework, or learning the framework?</p>
+                </section>
+
+                <section data-background="black">
+                    <h1>Fin</h1>
+                </section>
+
+                <section>
+                    <h1>Questions?</h1>
                 </section>
             </div>
 

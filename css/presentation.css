@@ -1,0 +1,6 @@
+.demo__group {
+    position: relative; vertical-align: top;
+}
+    .demo {
+        display: inline-block; width: 50%;
+    }

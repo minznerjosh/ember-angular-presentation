@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>AngularJS Two-Way Databinding</title>
+    </head>
+    <body ng-app="app">
+        <h3>{{title}}</h3>
+        <blink ng-click="title = 'foo'">Hello!</blink>
+        <script src="../../lib/js/angular.js"></script>
+        <script>
+            angular.module('app', [])
+                .directive('blink', function($timeout) {
+                    return {
+                        restrict: 'E',
+                        scope: {},
+                        link: function(scope, element) {
+                            function show() {
+                                element.css('display', '');
+                                $timeout(hide, 1000);
+                            }
+
+                            function hide() {
+                                element.css('display', 'none');
+                                $timeout(show, 1000);
+                            }
+
+                            show();
+                        }
+                    };
+                });
+        </script>
+    </body>
+</html>

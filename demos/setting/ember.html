@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Ember.js Two-Way Databinding</title>
+    </head>
+    <body>
+        <script type="text/x-handlebars">
+            <h4>What's up, {{name}}?</h4>
+            <button {{action "sayName" "Josh"}}>Say My Name</button>
+        </script>
+
+        <script src="../../lib/js/jquery-1.10.2.js"></script>
+        <script src="../../lib/js/handlebars-1.1.2.js"></script>
+        <script src="../../lib/js/ember-1.4.0.js"></script>
+
+        <script>
+            var App = Ember.Application.create();
+            App.ApplicationController = Ember.Controller.extend({
+                name: 'Nobody',
+                actions: {
+                    sayName: function(name) {
+                        this.set('name', name);
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

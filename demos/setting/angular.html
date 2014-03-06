@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>AngularJS Two-Way Databinding</title>
+    </head>
+    <body ng-app ng-controller="AppController as AppCtrl">
+        <h4>What's up, {{name}}?</h4>
+        <button ng-click="AppCtrl.sayName('Josh')">Say My Name</button>
+        <script src="../../lib/js/angular.js"></script>
+        <script>
+            function AppController($scope) {
+                $scope.name = 'Nobody';
+
+                this.sayName = function(name) {
+                    $scope.name = name;
+                }
+            }
+        </script>
+    </body>
+</html>

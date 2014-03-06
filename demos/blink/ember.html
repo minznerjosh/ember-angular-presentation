@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Ember.js Two-Way Databinding</title>
+        <style>
+            .list-of-bs {
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <script type="text/x-handlebars">
+            {{#io-blink}}Hello!{{/io-blink}}
+        </script>
+
+        <script type="text/x-handlebars" data-template-name="components/io-blink">
+            {{yield}}
+        </script>
+
+        <script src="../../lib/js/jquery-1.10.2.js"></script>
+        <script src="../../lib/js/handlebars-1.1.2.js"></script>
+        <script src="../../lib/js/ember-1.4.0.js"></script>
+
+        <script>
+            var App = Ember.Application.create();
+            App.IoBlinkComponent = Ember.Component.extend({
+                show: function() {
+                    this.$().show();
+                    Ember.run.later(this, this.hide, 1000);
+                }.on('didInsertElement'),
+                hide: function() {
+                    this.$().hide();
+                    Ember.run.later(this, this.show, 1000);
+                }
+            });
+        </script>
+    </body>
+</html>

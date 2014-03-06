@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Ember.js Two-Way Databinding</title>
+    </head>
+    <body>
+        <script type="text/x-handlebars">
+            <h4>My Title: {{title}}</h4>
+            <form action="">
+                {{input value=title}}
+            </form>
+        </script>
+
+        <script src="../../lib/js/jquery-1.10.2.js"></script>
+        <script src="../../lib/js/handlebars-1.1.2.js"></script>
+        <script src="../../lib/js/ember-1.4.0.js"></script>
+
+        <script>
+            var App = Ember.Application.create();
+        </script>
+    </body>
+</html>

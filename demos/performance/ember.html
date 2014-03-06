@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Ember.js Two-Way Databinding</title>
+        <style>
+            .list-of-bs {
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <script type="text/x-handlebars">
+            <h4>My Title: {{title}}</h4>
+            <form action="">
+                {{input value=title}}
+            </form>
+            <ul class="list-of-bs">
+                {{#each list}}
+                    <li>{{this.value}}</li>
+                {{/each}}
+            </ul>
+            <button {{action "upset"}}>GO NUTS!</button>
+            <button {{action "cleanUp"}}>Clean Up</button>
+        </script>
+
+        <script src="../../lib/js/jquery-1.10.2.js"></script>
+        <script src="../../lib/js/handlebars-1.1.2.js"></script>
+        <script src="../../lib/js/ember-1.4.0.js"></script>
+
+        <script>
+            var App = Ember.Application.create();
+            App.ApplicationController = Ember.Controller.extend({
+                list: [],
+                actions: {
+                    upset: function() {
+                        for (var index = 0; index < 20000; index++) {
+                            this.list.pushObject({
+                                value: index
+                            });
+                        }
+                    },
+                    cleanUp: function() {
+                        this.list.clear();
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

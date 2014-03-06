@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>AngularJS Two-Way Databinding</title>
+        <style>
+            .list-of-bs {
+                display: none;
+            }
+        </style>
+    </head>
+    <body ng-app ng-controller="AppController as AppCtrl">
+        <h4>My Title: {{title}}</h4>
+        <form action="">
+            <input type="text" ng-model="title">
+        </form>
+        <ul class="list-of-bs">
+            <li ng-repeat="model in list">{{model.value}}</li>
+        </ul>
+        <button ng-click="AppCtrl.upset()">GO NUTS!</button>
+        <button ng-click="list.length = 0">Clean Up</button>
+        <script src="../../lib/js/angular.js"></script>
+        <script>
+            function AppController($scope) {
+                $scope.list = [];
+
+                this.upset = function() {
+                    for (var index = 0; index < 20000; index++) {
+                        $scope.list.push({
+                            value: index
+                        });
+                    }
+                };
+            }
+        </script>
+    </body>
+</html>
